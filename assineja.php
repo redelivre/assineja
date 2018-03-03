@@ -25,10 +25,17 @@ class AssineJa {
 	
 	public function __construct() {
 		add_action('init', [$this, 'init']);
+		add_action('wp_ajax_aja_check_user_logged_in', [$this, 'check_user_logged_in']);
+		add_action('wp_ajax_nopriv_aja_check_user_logged_in', [$this, 'check_user_logged_in']);
 	}
 	
 	public function init() {
 		
+	}
+	
+	public function check_user_logged_in() {
+		echo is_user_logged_in() ? '1':'0';
+		die();
 	}
 }
 

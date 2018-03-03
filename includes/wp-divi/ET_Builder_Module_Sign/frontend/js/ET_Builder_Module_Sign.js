@@ -8,7 +8,7 @@ function divi_child_teste()
 
     var $that = jQuery(this);
     var data = {
-        'action': 'check_user_logged_in'
+        'action': 'aja_check_user_logged_in'
     };
 
     jQuery.post(ajaxurl, data,function(response){ // aja

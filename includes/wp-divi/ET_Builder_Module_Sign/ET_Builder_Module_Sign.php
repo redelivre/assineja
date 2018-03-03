@@ -109,7 +109,7 @@ class ET_Builder_Module_Sign extends ET_Builder_Module {
 				'label'           => esc_html__( 'Title', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Define a title for your form.', 'et_builder' ),
+				'description'     => esc_html__( 'Define a title for your document.', 'et_builder' ),
 			),
 
 			'use_redirect' => array(
@@ -321,7 +321,7 @@ class ET_Builder_Module_Sign extends ET_Builder_Module {
 
 			// Add all custom fields into the message body by default
 			foreach ( $processed_fields_values as $key => $value ) {
-				if ( ! in_array( $key, array( 'message', 'name', 'email','descricao','descrição','titulo','tags' ) ) ) {
+				if ( ! in_array( $key, array( 'titulo' ) ) ) {
 					$message_pattern .= "\r\n";
 					$message_pattern .= sprintf(
 							'%1$s: %2$s',
@@ -352,7 +352,7 @@ class ET_Builder_Module_Sign extends ET_Builder_Module {
 				$redirect_url = esc_url( get_permalink($post_id) );
 			}
 
-			$et_error_message = sprintf( '<p>%1$s</p>', 'Obrigado por participar, você pode ver sua proposta <a href="'.$redirect_url.'">aqui</a>.' );
+			$et_error_message = sprintf( '<p>%1$s</p>', 'Obrigado por participar, você pode ver o documento assinado <a href="'.$redirect_url.'">aqui</a>.' );
 
 		}
 
@@ -426,16 +426,13 @@ class ET_Builder_Module_Sign extends ET_Builder_Module {
 	
 	function javascriptFiles()
 	{
-		if (!is_pauta())
-		{
-			wp_enqueue_script('ET_Builder_Module_Sign',  plugins_url("frontend/js", __FILE__).'/ET_Builder_Module_Sign.js', array('jquery'));
-	
-			$data = array(
-				'ajax_url' => admin_url('admin-ajax.php'),
-				'url' => wp_login_url( get_permalink() )
-			);
-			wp_localize_script('ET_Builder_Module_Sign', 'ET_Builder_Module_Sign', $data);
-		}
+		wp_enqueue_script('ET_Builder_Module_Sign',  plugins_url("frontend/js", __FILE__).'/ET_Builder_Module_Sign.js', array('jquery'));
+
+		$data = array(
+			'ajax_url' => admin_url('admin-ajax.php'),
+			'url' => wp_login_url( get_permalink() )
+		);
+		wp_localize_script('ET_Builder_Module_Sign', 'ET_Builder_Module_Sign', $data);
 	}
 	
 }
